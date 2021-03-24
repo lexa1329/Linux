@@ -32,7 +32,7 @@ int main(int argc, char** argv, char** envp){
 
     countProc = atoi(argv[2]);
     countIter = atoi(argv[3]);
-
+    
     handle = fopen("logfile.log", "a+");
     if(!handle){
         perror("Error open logfile\n");
@@ -59,18 +59,15 @@ int main(int argc, char** argv, char** envp){
         }
     }
 
+    int status = 0;
     if(subPid != 0){
-        pid_t p;
-        pid_t parentPid = getppid();
-        int status;
-        p = waitpid(-1, &status, 0);    
-        while (p != -1){
-            p = waitpid(-1, &status, 0);
-        }
-        fclose(handle);
-        exit(0);
+        while (wait(&status) > 0) {
+		    if (status != 0) {
+				exit(1);
+			}
+		}
     }
-
+    
     fclose(handle);
     return 0;
-} 
+}
