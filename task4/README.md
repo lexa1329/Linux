@@ -39,4 +39,4 @@
 	killall -s STOP ta
 
 Результат работы программы
-!Скрин работы(https://i.imgur.com/1kyM7XT.png)
+!Скрин работы(https://i.imgur.com/UlpfXpQ.png) 
