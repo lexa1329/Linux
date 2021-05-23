@@ -82,6 +82,7 @@
 	Процесс повторяется до тех пор, пока пакет не достигнет целевого узла. При получении ответа от этого узла процесс трассировки считается завершённым.
 	
 17 Какой тип icmp запросов используется в ping утилите
+	
 	тип 0 (эхо-ответ)
 	тип 8 (эхо-запрос)
 	
@@ -89,38 +90,46 @@
 Практика
 
 1 Произвести настройку IP адреса сетевого интерфейса eth0 через конфиг и на лету
-	---конфиг
+	
+	Конфиг
 		auto eth0
 		iface eth0 iten static
 			address 192.168.0.2/24
 			gateway 192.168.0.1
-
-$ systemctl restart networking
-
-	---На ленту
+			
+	$ systemctl restart networking
+	
+	На ленту
+	
 	$ ifconfig eth0 192.168.0.2
 	
 	
 2 Остановить и запустить сетевой интерфейс eth0
+	
 	$ ifconfig eth0 down
 	$ ifconfig eth0 up
 	
 	
 3 Произвести смену аппаратного (MAC) адреса сетевого интерфейса eth0;
+
 	$ ifconfig eth0 hw ether AA:AA:AA:AA:AA:AA
 	
 4 Показать таблицу сетевых маршрутов. Установить маршрут по умолчанию;
+	
 	$ route add default gw 192.168.0.1 eth0
-	![linux](https://i.imgur.com/cGRuLDA.png)
+![linux](https://i.imgur.com/cGRuLDA.png)
+
 5 Получить настройки IP от DHCP сервера;
+	
 	iface eth0 inet dhcp
 	
-	![linux](https://i.imgur.com/WGEfugE.png)
+![linux](https://i.imgur.com/WGEfugE.png)
 
 6 проверить пропускную способность между виртуальными машинами
 	![linux](https://i.imgur.com/6S26JTn.png)
 
 7 настроить связь между виртуальными машинами через vlan 15
+	
 	Первая виртуалка
 	auto eth0.15 
 	iface eth0.15 inet static
@@ -135,5 +144,5 @@ $ systemctl restart networking
 	  address 192.168.0.1
 	  vlan_raw_device eth0
 	  
-	  ![linux](https://i.imgur.com/Ck3lr3h.png)
+![linux](https://i.imgur.com/Ck3lr3h.png)
 
